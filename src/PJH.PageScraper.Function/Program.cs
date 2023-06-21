@@ -10,6 +10,7 @@ var host = new HostBuilder()
     {
         // s.AddTransient<IScrapingClient, HttpScrapingClient>();//Uncomment to use .NET HttpClient
         s.AddTransient<IScrapingClient, BrowserScrapingClient>();//Comment for use of .NET HttpClient
+        //s.AddTransient<IScrapingClient, SeleniumWebDriverClient>();//Uncomment to use Selenium WebDriver
         s.AddTransient<IScrapingService, ScrapingService>();
 
         // s.Configure<LoggerFilterOptions>(options =>

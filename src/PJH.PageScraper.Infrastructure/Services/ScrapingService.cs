@@ -91,26 +91,34 @@ public class ScrapingService : IScrapingService
 
                 Image image = new Image();
                 image.Url = imageSourceAttribute?.Value ?? string.Empty;
-                
-                //Make sure the image url is fully qualified with Scheme and Host
-                if(!image.Url.StartsWith("http")){
 
-                    //If url is in // form then remove including host name
-                    if(image.Url.StartsWith("//"))
+                //Check that the image has a valid Source.
+                if (!string.IsNullOrEmpty(image.Url))
+                {
+                    //Check that the image was not already added to the list
+                    if (images.FirstOrDefault(i => i.Url == image.Url) is null)
                     {
-                        image.Url = image.Url.Replace(string.Concat("//", pageUrl.Host), string.Empty);
-                    }
+                        //Make sure the image url is fully qualified with Scheme and Host
+                        if (!image.Url.StartsWith("http"))
+                        {
+                            //If url is in // form then remove including host name
+                            if (image.Url.StartsWith("//"))
+                            {
+                                image.Url = image.Url.Replace(string.Concat("//", pageUrl.Host), string.Empty);
+                            }
 
-                    //Now add Scheme and Host
-                    image.Url = string.Format("{0}://{1}{2}", pageUrl.Scheme, pageUrl.Host, image.Url);
+                            //Now add Scheme and Host
+                            image.Url = string.Format("{0}://{1}{2}{3}", pageUrl.Scheme, pageUrl.Host, !image.Url.StartsWith("/") ? "/" : string.Empty, image.Url);
+                        }
+
+                        image.Alt = imageAltAttribute?.Value ?? string.Empty;
+                        image.Width = imageWidthAttribute?.Value ?? string.Empty;
+                        image.Height = imageHeightAttribute?.Value ?? string.Empty;
+
+                        if (!string.IsNullOrEmpty(image.Url))
+                            images.Add(image);
+                    }
                 }
-                
-                image.Alt = imageAltAttribute?.Value ?? string.Empty;
-                image.Width = imageWidthAttribute?.Value ?? string.Empty;
-                image.Height = imageHeightAttribute?.Value ?? string.Empty;
-                
-                if (!string.IsNullOrEmpty(image.Url)) 
-                    images.Add(image);                            
             }
             
         }
