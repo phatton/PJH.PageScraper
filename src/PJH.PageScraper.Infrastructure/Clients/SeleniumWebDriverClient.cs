@@ -19,7 +19,7 @@ namespace PJH.PageScraper.Infrastructure.Clients
             this.logger = logger;
         }
 
-        public Task<string> FetchHtml(Uri uri)
+        public Task<string> FetchHtmlAsync(Uri uri)
         {
             string result = "Nothing Happend";
             try

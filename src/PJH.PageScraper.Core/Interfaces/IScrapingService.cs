@@ -4,5 +4,6 @@ namespace PJH.PageScraper.Core.Interfaces;
 
 public interface IScrapingService
 {
-    Task<PageData> GetPageData(string url);
+    Task<PageData> GetPageDataAsync(string pageUrl);
+    Task<PageData> GetPageDataAsync(Uri pageUrl);
 }

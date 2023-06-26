@@ -14,7 +14,7 @@ public class HttpScrapingClient : IScrapingClient
         this.logger = logger;
     }
 
-    public async Task<string> FetchHtml(Uri uri)
+    public async Task<string> FetchHtmlAsync(Uri uri)
     {
         // Create the client with the factory
         HttpClient client = this.httpClientFactory.CreateClient();

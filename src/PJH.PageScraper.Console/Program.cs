@@ -48,7 +48,7 @@ internal class Worker : IHostedService
         logger.LogInformation("1. StartAsync has been called.");
 
          string url = "https://www.xcentium.com/";//"https://en.wikipedia.org/wiki/List_of_programmers"
-         var pageData = await this.scraptingService.GetPageData(url);
+         var pageData = await this.scraptingService.GetPageDataAsync(url);
 
         foreach(var image in pageData.ImageList)
         {

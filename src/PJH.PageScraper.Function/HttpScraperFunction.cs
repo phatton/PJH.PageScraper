@@ -52,7 +52,7 @@ namespace PJH.PageScraper.Function
             
             if(!string.IsNullOrEmpty(url)){
                 //Retrieve PageData
-                pageData = await this.scrapingService.GetPageData(url);
+                pageData = await this.scrapingService.GetPageDataAsync(url);
             }            
 
             var response = req.CreateResponse(HttpStatusCode.OK);

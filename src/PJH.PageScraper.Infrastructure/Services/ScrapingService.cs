@@ -18,7 +18,7 @@ public class ScrapingService : IScrapingService
         this.logger = logger;
     }
 
-    public async Task<PageData> GetPageData(string pageUrl)
+    public async Task<PageData> GetPageDataAsync(string pageUrl)
     {
         if(string.IsNullOrEmpty(pageUrl))
         {
@@ -27,10 +27,10 @@ public class ScrapingService : IScrapingService
         
         Uri pageUri = new Uri(pageUrl);
 
-        return await GetPageData(pageUri);
+        return await GetPageDataAsync(pageUri);
     }
 
-    public async Task<PageData> GetPageData(Uri pageUrl)
+    public async Task<PageData> GetPageDataAsync(Uri pageUrl)
     {
         if(pageUrl == null)
         {
@@ -40,7 +40,7 @@ public class ScrapingService : IScrapingService
         PageData pageData = new PageData();
 
         //Retrieve HTML string
-        var response = await this.scrapingClient.FetchHtml(pageUrl);
+        var response = await this.scrapingClient.FetchHtmlAsync(pageUrl);
         
         //If HTML is available
         if(!string.IsNullOrEmpty(response))

@@ -34,7 +34,7 @@ public class BrowserScrapingClient : IScrapingClient
 				.Build();
     }
 
-    public async Task<string> FetchHtml(Uri uri)
+    public async Task<string> FetchHtmlAsync(Uri uri)
     {
         this.url = uri.ToString();
 
